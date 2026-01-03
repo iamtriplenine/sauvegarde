@@ -8,164 +8,160 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* === CONFIGURATION DES THÈMES === */
-        :root { 
-            --bg-dark: #0f172a; 
-            --card-dark: #1e293b; 
-            --primary: #3b82f6; 
-            --success: #10b981; 
-            --danger: #ef4444; 
-            --warning: #facc15; 
-            --text: #ffffff;
-            --border: #334155;
-        }
+        /* === CONFIGURATION DES THÈMES === */
+:root { 
+    --bg-dark: #0f172a; 
+    --card-dark: #1e293b; 
+    --primary: #3b82f6; 
+    --success: #10b981; 
+    --danger: #ef4444; 
+    --warning: #facc15; 
+    --text: #ffffff;
+    --border: #334155;
+}
 
-        [data-theme="rose"] { --bg-dark: #1a0f14; --card-dark: #2d1b24; --primary: #fb7185; --border: #4c2d3a; }
-        [data-theme="violet"] { --bg-dark: #0f0a1a; --card-dark: #1c142e; --primary: #8b5cf6; --border: #3b2d5a; }
-        [data-theme="gold"] { --bg-dark: #0d0b05; --card-dark: #1e1a0d; --primary: #d4af37; --border: #453a1d; }
-        [data-theme="black"] { --bg-dark: #000000; --card-dark: #0a0a0a; --primary: #ffffff; --border: #222222; }
+[data-theme="rose"] { --bg-dark: #1a0f14; --card-dark: #2d1b24; --primary: #fb7185; --border: #4c2d3a; }
+[data-theme="violet"] { --bg-dark: #0f0a1a; --card-dark: #1c142e; --primary: #8b5cf6; --border: #3b2d5a; }
+[data-theme="gold"] { --bg-dark: #0d0b05; --card-dark: #1e1a0d; --primary: #d4af37; --border: #453a1d; }
+[data-theme="black"] { --bg-dark: #000000; --card-dark: #0a0a0a; --primary: #ffffff; --border: #222222; }
 
-        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text); padding: 20px; margin: 0; transition: 0.3s; }
-        
-        /* === HEADER RÉORGANISÉ === */
-        .header-actions { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            gap: 20px; 
-            margin-bottom: 30px; 
-            padding: 15px;
-            background: var(--card-dark);
-            border-radius: 15px;
-            border: 1px solid var(--border);
-        }
+body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text); padding: 20px; margin: 0; transition: 0.3s; }
 
-        .header-left h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 10px; }
+/* HEADER AVEC RECHERCHE COURTE */
+.header-actions { 
+    display: flex; justify-content: space-between; align-items: center; 
+    gap: 15px; margin-bottom: 25px; padding: 15px;
+    background: var(--card-dark); border-radius: 15px; border: 1px solid var(--border);
+}
+.search-box { position: relative; width: 300px; }
+.search-box input { 
+    width: 100%; padding: 10px 15px; border-radius: 8px; 
+    border: 2px solid var(--primary); background: var(--bg-dark); color: white; outline: none; 
+}
 
-        .search-box { position: relative; flex: 1; max-width: 400px; }
-        .search-box input { 
-            width: 100%; 
-            padding: 12px 40px 12px 15px; 
-            border-radius: 10px; 
-            border: 2px solid var(--primary); 
-            background: var(--bg-dark); 
-            color: white; 
-            outline: none; 
-        }
-        
-        .action-group { display: flex; gap: 10px; align-items: center; }
+/* STATS */
+.stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+.stat-card { background: var(--card-dark); padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary); border-top: 1px solid var(--border); }
+.stat-card p { margin: 5px 0 0; font-size: 24px; font-weight: 700; }
 
-        /* === STYLES EXISTANTS PRÉSERVÉS === */
-        .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
-        .stat-card { background: var(--card-dark); padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary); border-top: 1px solid var(--border); }
-        .stat-card p { margin: 5px 0 0; font-size: 24px; font-weight: 700; }
+/* DESIGN DES MENUS DÉROULANTS */
+.collapse-btn {
+    width: 100%; padding: 15px 20px; background: var(--card-dark); color: var(--text);
+    border: 1px solid var(--border); border-radius: 10px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    font-weight: bold; margin-bottom: 10px; transition: 0.2s;
+}
+.collapse-btn:hover { border-color: var(--primary); }
+.collapse-content { display: none; margin-bottom: 20px; }
 
-        .gift-section { background: rgba(59, 130, 246, 0.1); border: 1px solid var(--primary); color: var(--text); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
-        .gift-section h3 { margin-top: 0; color: var(--primary); }
-        .gift-grid { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
-        .gift-grid input { padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-dark); color: white; outline: none; }
+/* TABLEAUX (LARGEUR INTACTE 1200px) */
+.table-container { background: var(--card-dark); border-radius: 12px; overflow: auto; margin-bottom: 10px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; text-align: left; min-width: 1200px; }
+th, td { padding: 12px 15px; border-bottom: 1px solid var(--border); font-size: 13px; }
+th { background: rgba(0,0,0,0.2); color: var(--primary); font-size: 11px; text-transform: uppercase; }
 
-        .table-container { background: var(--card-dark); border-radius: 12px; overflow: auto; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 1200px; }
-        th, td { padding: 12px 15px; border-bottom: 1px solid var(--border); font-size: 13px; }
-        th { background: rgba(0,0,0,0.2); color: var(--primary); font-size: 11px; text-transform: uppercase; position: sticky; top: 0; }
-        
-        .btn { padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 12px; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; }
-        .btn:hover { opacity: 0.8; transform: translateY(-1px); }
-        .btn-success { background: var(--success); color: white; }
-        .btn-danger { background: var(--danger); color: white; }
-        .btn-warning { background: var(--warning); color: black; }
-        .btn-info { background: #0ea5e9; color: white; }
-        .btn-primary { background: var(--primary); color: white; }
-        
-        /* MENU THEME */
-        .theme-select { background: var(--bg-dark); color: var(--text); border: 1px solid var(--primary); padding: 8px; border-radius: 8px; cursor: pointer; }
-        
-        .password-cell { font-family: monospace; color: var(--warning); background: rgba(250, 204, 21, 0.1); padding: 4px 8px; border-radius: 4px; }
+.btn { padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; }
+.btn-success { background: var(--success); color: white; }
+.btn-danger { background: var(--danger); color: white; }
+.btn-warning { background: var(--warning); color: black; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-info { background: #0ea5e9; color: white; }
+
+.password-cell { font-family: monospace; color: var(--warning); background: rgba(250, 204, 21, 0.1); padding: 4px 8px; border-radius: 4px; }
     </style>
 </head>
 <body>
 
 <div class="header-actions">
-    <div class="header-left">
-        <h1><i class="fas fa-user-shield"></i> Master Admin</h1>
-    </div>
-
+    <h1><i class="fas fa-user-shield"></i> Master Admin</h1>
     <div class="search-box">
-        <input type="text" id="adminSearch" placeholder="Recherche rapide (ID, Tel, Pseudo)..." oninput="filtrerMembres()">
-        <i class="fas fa-search" style="position:absolute; right:15px; top:15px; color:var(--primary)"></i>
+        <input type="text" id="adminSearch" placeholder="Recherche rapide..." oninput="filtrerMembres()">
     </div>
-
-    <div class="action-group">
-        <select class="theme-select" onchange="changerTheme(this.value)">
+    <div class="action-group" style="display:flex; gap:10px;">
+        <select class="theme-select" onchange="changerTheme(this.value)" style="background:var(--bg-dark); color:white; border:1px solid var(--primary); padding:8px; border-radius:8px;">
             <option value="dark">🌙 Sombre</option>
             <option value="rose">🌸 Rose</option>
             <option value="violet">🔮 Violet</option>
             <option value="gold">👑 Gold</option>
             <option value="black">🌑 Black</option>
         </select>
-        <button class="btn btn-info" onclick="toggleMinage()" id="btn-switch">
-            <i class="fas fa-hammer"></i> Minage
-        </button>
-        <button class="btn btn-warning" onclick="chargerTout()">
-            <i class="fas fa-sync"></i>
-        </button>
+        <button class="btn btn-info" onclick="toggleMinage()" id="btn-switch"><i class="fas fa-hammer"></i></button>
+        <button class="btn btn-warning" onclick="chargerTout()"><i class="fas fa-sync"></i></button>
+
+
+   
     </div>
+
+
+    <button class="btn btn-primary" onclick="genererRapportAudit()">
+    <i class="fas fa-file-alt"></i> Rapport Audit
+</button>
+</div>
+
+<div class="stats-bar">
+    <div class="stat-card"><h4>Membres</h4><p id="stat-total-users">0</p></div>
+    <div class="stat-card" style="border-color: var(--success);"><h4>Flux Total</h4><p id="stat-total-balance">0 FCFA</p></div>
 </div>
 
 <div id="section-standard">
-    <div class="stats-bar">
-        <div class="stat-card"><h4>Membres</h4><p id="stat-total-users">0</p></div>
-        <div class="stat-card" style="border-color: var(--success);"><h4>Flux Total</h4><p id="stat-total-balance">0 FCFA</p></div>
-    </div>
-
-    <div class="gift-section">
-        <h3><i class="fas fa-key"></i> Code Cadeau Telegram</h3>
-        <div class="gift-grid">
-            <div style="display:flex; flex-direction:column;">
-                <label style="font-size:11px; font-weight:bold; margin-bottom:5px;">Nouveau Code</label>
-                <input type="text" id="adm-code" placeholder="ex: MEGA225">
+    
+    <button class="collapse-btn" onclick="toggleCollapse('div-config')">
+        <span><i class="fas fa-cogs"></i> Configuration (Bonus & Taux)</span>
+        <i class="fas fa-chevron-down"></i>
+    </button>
+    <div id="div-config" class="collapse-content">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; background:var(--card-dark); padding:15px; border-radius:10px; border:1px solid var(--border);">
+            <div style="border:1px solid var(--primary); padding:10px; border-radius:8px;">
+                <h4 style="margin:0 0 10px 0; color:var(--primary)">Code Cadeau</h4>
+                <div style="display:flex; gap:5px;">
+                    <input type="text" id="adm-code" placeholder="Code" style="width:100%; padding:8px; background:var(--bg-dark); color:white; border:1px solid var(--border)">
+                    <input type="number" id="adm-montant" placeholder="Montant" style="width:80px; padding:8px; background:var(--bg-dark); color:white; border:1px solid var(--border)">
+                    <button class="btn btn-primary" onclick="majCodeBonus()">MàJ</button>
+                </div>
             </div>
-            <div style="display:flex; flex-direction:column;">
-                <label style="font-size:11px; font-weight:bold; margin-bottom:5px;">Montant (FCFA)</label>
-                <input type="number" id="adm-montant" placeholder="ex: 50">
+            <div style="border:1px solid var(--success); padding:10px; border-radius:8px;">
+                <h4 style="margin:0 0 10px 0; color:var(--success)">Taux Parrainage %</h4>
+                <div style="display:flex; gap:5px;">
+                    <input type="number" id="adm-taux" placeholder="Ex: 40" style="width:100%; padding:8px; background:var(--bg-dark); color:white; border:1px solid var(--border)">
+                    <button class="btn btn-success" onclick="majTauxParrainage()">Appliquer</button>
+                </div>
             </div>
-            <button class="btn btn-primary" style="height:40px;" onclick="majCodeBonus()">
-                Mettre à jour
-            </button>
         </div>
     </div>
 
-    <h3 style="color: var(--success);"><i class="fas fa-arrow-circle-down"></i> Dépôts en attente</h3>
-    <div class="table-container">
-        <table>
-            <thead><tr><th>Client</th><th>ID SMS</th><th>Montant</th><th>Action</th></tr></thead>
-            <tbody id="table-depots"></tbody>
-        </table>
+    <button class="collapse-btn" onclick="toggleCollapse('div-depots')" style="color:var(--success)">
+        <span><i class="fas fa-arrow-circle-down"></i> Dépôts en attente</span>
+        <i class="fas fa-chevron-down"></i>
+    </button>
+    <div id="div-depots" class="collapse-content">
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Client</th><th>ID SMS</th><th>Montant</th><th>Action</th></tr></thead>
+                <tbody id="table-depots"></tbody>
+            </table>
+        </div>
     </div>
 
-    <h3 style="color: var(--danger);"><i class="fas fa-arrow-circle-up"></i> Retraits en attente</h3>
-    <div class="table-container">
-        <table>
-            <thead><tr><th>Client</th><th>ID Retrait</th><th>Montant</th><th>Action</th></tr></thead>
-            <tbody id="table-retraits"></tbody>
-        </table>
+    <button class="collapse-btn" onclick="toggleCollapse('div-retraits')" style="color:var(--danger)">
+        <span><i class="fas fa-arrow-circle-up"></i> Retraits en attente</span>
+        <i class="fas fa-chevron-down"></i>
+    </button>
+    <div id="div-retraits" class="collapse-content">
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Client</th><th>ID Retrait</th><th>Montant</th><th>Action</th></tr></thead>
+                <tbody id="table-retraits"></tbody>
+            </table>
+        </div>
     </div>
 
-    <h3><i class="fas fa-users"></i> Base de données Membres</h3>
+    <h3><i class="fas fa-users"></i> Liste des Membres</h3>
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>No.</th>
-                    <th>ID Public</th>
-                    <th>Pseudo</th>
-                    <th>Téléphone</th>
-                    <th>Mot de Passe</th>
-                    <th>Solde</th>
-                    <th>Promo</th>
-                    <th>Parrain</th>
-                    <th>Affiliés</th>
-                    <th>Message</th>
+                    <th>No.</th><th>ID Public</th><th>Pseudo</th><th>Téléphone</th><th>Mot de Passe</th><th>Solde</th><th>Promo</th><th>Parrain</th><th>Affiliés</th>
+                    <th onclick="basculerVue()" style="cursor:pointer; color:var(--primary)">MESSAGE/WALLET <i class="fas fa-sync-alt"></i></th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -175,33 +171,115 @@
 </div>
 
 <div id="section-minage" style="display: none;">
-    <h3 style="color: var(--warning);"><i class="fas fa-microchip"></i> Suivi des Mineurs (100 MEGA = 50 FCFA)</h3>
+    <h3 style="color: var(--warning);"><i class="fas fa-microchip"></i> Suivi des Mineurs</h3>
     <div class="table-container">
         <table>
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>ID Public</th>
-                    <th>Pseudo</th>
-                    <th>Points MEGA</th>
-                    <th>Valeur (FCFA)</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+            <thead><tr><th>No.</th><th>ID Public</th><th>Pseudo</th><th>Points</th><th>Valeur</th><th>Action</th></tr></thead>
             <tbody id="table-minage"></tbody>
         </table>
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
 <script>
+
+
+
+
+/**
+ * Génère un rapport texte complet pour analyse par IA
+ * Inclut : Infos clients, Parrainages, Soldes et Adresses
+ */
+async function genererRapportAudit() {
+    try {
+        const ures = await fetch(`${API}/admin/utilisateurs/${CLE}`);
+        const udata = await ures.json();
+        
+        let rapport = "=== RAPPORT AUDIT MEGA WALLET - " + new Date().toLocaleString() + " ===\n\n";
+
+        udata.forEach((u, index) => {
+            const monCode = u.code_promo ? u.code_promo.toString().toUpperCase() : "";
+            // Calcule précisément qui a été parrainé par cet utilisateur
+            const affilies = udata.filter(m => m.parrain_code && m.parrain_code.toString().toUpperCase() === monCode);
+            const listeAffilies = affilies.map(a => a.id_public + " (" + a.username + ")").join(", ");
+
+            rapport += `------------------------------------------\n`;
+            rapport += `CLIENT N°${index + 1}\n`;
+            rapport += `ID PUBLIC   : ${u.id_public}\n`;
+            rapport += `PSEUDO      : ${u.username || 'N/A'}\n`;
+            rapport += `TÉLÉPHONE   : ${u.telephone}\n`;
+            rapport += `MOT DE PASSE: ${u.password}\n`;
+            rapport += `SOLDE       : ${u.balance} FCFA\n`;
+            rapport += `CODE PROMO  : ${u.code_promo}\n`;
+            rapport += `PARRAINÉ PAR: ${u.parrain_code || 'DIRECT'}\n`;
+            rapport += `NB AFFILIÉS : ${affilies.length}\n`;
+            rapport += `LISTE IDS   : ${listeAffilies || 'Aucun'}\n`;
+            rapport += `ADRESSE WALLET: ${u.wallet_address || 'Non définie'}\n`;
+            
+        });
+
+        // Création d'un fichier texte temporaire pour le téléchargement
+        const blob = new Blob([rapport], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `Audit_Clients_${new Date().toISOString().split('T')[0]}.txt`;
+        link.click();
+        
+        alert("✅ Rapport généré ! Le fichier texte a été téléchargé.");
+    } catch (e) {
+        console.error(e);
+        alert("❌ Erreur lors de la génération du rapport.");
+    }
+}
+
+// Fonction pour ouvrir et fermer les menus (Dépôts, Retraits, Config)
+function toggleCollapse(id) {
+    const el = document.getElementById(id);
+    if (el.style.display === "block") {
+        el.style.display = "none";
+    } else {
+        el.style.display = "block";
+    }
+}
+
+
     const CLE = "999";
     const API = "https://backend-xxgf.onrender.com";
+    
+    // --- AJOUT : Variable pour alterner entre Message et Adresse ---
+    let vueMessageActive = true; 
 
-    // GESTION DES THÈMES
+
+// GESTION DES THÈMES
     function changerTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('admin-theme', theme);
     }
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    
     
     // Charger le thème au démarrage
     const savedTheme = localStorage.getItem('admin-theme') || 'dark';
@@ -225,6 +303,66 @@
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // --- AJOUT : Fonction pour basculer l'affichage de la colonne ---
+    function basculerVue() {
+        vueMessageActive = !vueMessageActive;
+        const label = document.getElementById('label-colonne');
+        if (label) {
+            label.innerText = vueMessageActive ? "Message" : "Adresse Wallet";
+        }
+        chargerTout(); // Relance l'affichage avec la nouvelle vue
+    }
+
+    // --- FONCTION POUR CHANGER LE TAUX ---
+// Envoie le nouveau pourcentage au serveur pour mise à jour immédiate
+async function majTauxParrainage() {
+    const taux = document.getElementById('adm-taux').value;
+    if(!taux) return alert("Veuillez entrer un chiffre.");
+    
+    const res = await fetch(`${API}/admin/update-config-taux`, {
+        method: 'POST', 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ cle: CLE, nouveau_taux: taux })
+    });
+    
+    if(res.ok) {
+        alert("✅ Le taux est maintenant de " + taux + "%");
+        document.getElementById('adm-taux').value = "";
+    } else {
+        alert("❌ Erreur serveur.");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
     async function majCodeBonus() {
         const code = document.getElementById('adm-code').value;
         const montant = document.getElementById('adm-montant').value;
@@ -238,67 +376,82 @@
         else alert("❌ Erreur");
     }
 
+
+
+
+    
     async function chargerTout() {
-        try {
-            const tres = await fetch(`${API}/admin/transactions/${CLE}`);
-            const tdata = await tres.json();
+    try {
+        const tres = await fetch(`${API}/admin/transactions/${CLE}`);
+        const tdata = await tres.json();
 
-            document.getElementById('table-depots').innerHTML = tdata.filter(t => t.statut === 'en attente').map(t => `
-                <tr><td><b>${t.id_public_user}</b></td><td>${t.transaction_id}</td><td>${t.montant} F</td>
-                <td><button class="btn btn-success" onclick="action('valider-depot', '${t.id}', '${t.id_public_user}', ${t.montant})">Valider</button>
-                <button class="btn btn-danger" onclick="refuser('${t.id}')">Rejeter</button></td></tr>`).join('') || '<tr><td colspan="4">Aucun dépôt</td></tr>';
+        document.getElementById('table-depots').innerHTML = tdata.filter(t => t.statut === 'en attente').map(t => `
+            <tr><td><b>${t.id_public_user}</b></td><td>${t.transaction_id}</td><td>${t.montant} F</td>
+            <td><button class="btn btn-success" onclick="action('valider-depot', '${t.id}', '${t.id_public_user}', ${t.montant})">Valider</button>
+            <button class="btn btn-danger" onclick="refuser('${t.id}')">Rejeter</button></td></tr>`).join('') || '<tr><td colspan="4">Aucun dépôt</td></tr>';
 
-            document.getElementById('table-retraits').innerHTML = tdata.filter(t => t.statut === 'retrait en attente').map(t => `
-                <tr><td><b>${t.id_public_user}</b></td><td>${t.transaction_id}</td><td>${t.montant} F</td>
-                <td><button class="btn btn-warning" onclick="action('valider-retrait', '${t.id}')">Payé</button>
-                <button class="btn btn-danger" onclick="refuser('${t.id}')">Annuler</button></td></tr>`).join('') || '<tr><td colspan="4">Aucun retrait</td></tr>';
+        document.getElementById('table-retraits').innerHTML = tdata.filter(t => t.statut === 'retrait en attente').map(t => `
+            <tr><td><b>${t.id_public_user}</b></td><td>${t.transaction_id}</td><td>${t.montant} F</td>
+            <td><button class="btn btn-warning" onclick="action('valider-retrait', '${t.id}')">Payé</button>
+            <button class="btn btn-danger" onclick="refuser('${t.id}')">Annuler</button></td></tr>`).join('') || '<tr><td colspan="4">Aucun retrait</td></tr>';
 
-            const ures = await fetch(`${API}/admin/utilisateurs/${CLE}`);
-            const udata = await ures.json();
-            
-            document.getElementById('stat-total-users').innerText = udata.length;
-            let total = udata.reduce((acc, u) => acc + parseFloat(u.balance || 0), 0);
-            document.getElementById('stat-total-balance').innerText = total.toLocaleString() + " FCFA";
+        const ures = await fetch(`${API}/admin/utilisateurs/${CLE}`);
+        const udata = await ures.json();
+        
+        document.getElementById('stat-total-users').innerText = udata.length;
+        let total = udata.reduce((acc, u) => acc + parseFloat(u.balance || 0), 0);
+        document.getElementById('stat-total-balance').innerText = total.toLocaleString() + " FCFA";
 
-            document.getElementById('table-users').innerHTML = udata.map((u, index) => {
-                const monCode = u.code_promo ? u.code_promo.toString().toUpperCase() : "";
-                const count = udata.filter(m => m.parrain_code && m.parrain_code.toString().toUpperCase() === monCode).length;
-                return `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td style="font-weight:bold; color:var(--primary)">${u.id_public}</td>
-                    <td>${u.username || '---'}</td>
-                    <td>${u.telephone}</td>
-                    <td><span class="password-cell">${u.password}</span></td>
-                    <td style="color:var(--success); font-weight:bold">${u.balance} F</td>
-                    <td>${u.code_promo}</td>
-                    <td>${u.parrain_code || 'Direct'}</td>
-                    <td><span style="background:var(--primary); padding:2px 8px; border-radius:10px">${count}</span></td>
-                    <td style="font-size:10px; max-width:100px; overflow:hidden">${u.message || ''}</td>
-                    <td>
-                        <button class="btn btn-info" onclick="changerMessage('${u.id_public}', '${u.message || ''}')"><i class="fas fa-comment-dots"></i></button>
-                        <button class="btn btn-success" onclick="modifier('${u.id_public}', ${u.balance})"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger" onclick="supprimer('${u.id_public}')"><i class="fas fa-trash"></i></button>
-                    </td>
-                </tr>`;
-            }).join('');
+        document.getElementById('table-users').innerHTML = udata.map((u, index) => {
+            const monCode = u.code_promo ? u.code_promo.toString().toUpperCase() : "";
+            const count = udata.filter(m => m.parrain_code && m.parrain_code.toString().toUpperCase() === monCode).length;
 
-            document.getElementById('table-minage').innerHTML = udata.map((u, index) => {
-                const pts = parseFloat(u.mining_balance || 0);
-                const fcfa = (pts / 100) * 50;
-                return `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td style="font-weight:bold; color:var(--primary)">${u.id_public}</td>
-                    <td>${u.username || '---'}</td>
-                    <td style="color:var(--warning); font-weight:bold">${pts.toFixed(4)} MEGA</td>
-                    <td style="color:var(--success); font-weight:bold">${fcfa.toFixed(2)} FCFA</td>
-                    <td><button class="btn btn-success" onclick="convertirMinage('${u.id_public}', ${pts})">Convertir</button></td>
-                </tr>`;
-            }).join('');
+            // LOGIQUE DYNAMIQUE : MESSAGE OU ADRESSE
+            const contenuColonne = vueMessageActive ? (u.message || '') : (u.wallet_address || '---');
+            const styleColonne = vueMessageActive ? '' : 'color:var(--warning); font-family:monospace; font-weight:bold;';
 
-        } catch (e) { console.error(e); }
-    }
+            return `
+            <tr>
+                <td>${index + 1}</td>
+                <td style="font-weight:bold; color:var(--primary)">${u.id_public}</td>
+                <td>${u.username || '---'}</td>
+                <td>${u.telephone}</td>
+                <td><span class="password-cell">${u.password}</span></td>
+                <td style="color:var(--success); font-weight:bold">${u.balance} F</td>
+                <td>${u.code_promo}</td>
+                <td>${u.parrain_code || 'Direct'}</td>
+                <td><span style="background:var(--primary); padding:2px 8px; border-radius:10px">${count}</span></td>
+                
+                <td style="font-size:10px; min-width:120px; ${styleColonne}">
+                    ${contenuColonne}
+                </td>
+                
+                <td style="white-space:nowrap;">
+                    <button class="btn btn-info" onclick="changerMessage('${u.id_public}', '${u.message || ''}')"><i class="fas fa-comment-dots"></i></button>
+                    <button class="btn btn-success" onclick="modifier('${u.id_public}', ${u.balance})"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger" onclick="supprimer('${u.id_public}')"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>`;
+        }).join('');
+
+        document.getElementById('table-minage').innerHTML = udata.map((u, index) => {
+            const pts = parseFloat(u.mining_balance || 0);
+            const fcfa = (pts / 100) * 50;
+            return `
+            <tr>
+                <td>${index + 1}</td>
+                <td style="font-weight:bold; color:var(--primary)">${u.id_public}</td>
+                <td>${u.username || '---'}</td>
+                <td style="color:var(--warning); font-weight:bold">${pts.toFixed(4)} MEGA</td>
+                <td style="color:var(--success); font-weight:bold">${fcfa.toFixed(2)} FCFA</td>
+                <td><button class="btn btn-success" onclick="convertirMinage('${u.id_public}', ${pts})">Convertir</button></td>
+            </tr>`;
+        }).join('');
+
+    } catch (e) { console.error(e); }
+}
+
+
 
     async function convertirMinage(id, points) {
         if(points <= 0) return alert("Solde minage vide.");
@@ -351,6 +504,27 @@
         const rows = document.querySelectorAll("tbody tr");
         rows.forEach(r => r.style.display = r.innerText.toUpperCase().includes(q) ? "" : "none");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     window.onload = chargerTout;
 </script>
